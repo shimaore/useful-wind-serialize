@@ -1,0 +1,17 @@
+{
+  "name": "useful-wind-serialize",
+  "version": "1.0.0",
+  "description": "serialize function that was previously available as `useful-wind/serialize`",
+  "main": "index.js",
+  "scripts": {
+    "prepublish": "coffee -c -m index.coffee.md",
+    "pretest": "npm install",
+    "test": "echo OK"
+  },
+  "author": "Stéphane Alnet <stephane@shimaore.net> (http://stephane.shimaore.net/)",
+  "license": "Unlicense",
+  "dependencies": {
+    "bluebird": "^2.10.1",
+    "debug": "^2.2.0"
+  }
+}
