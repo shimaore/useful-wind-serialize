@@ -1,20 +1,17 @@
 Serialize calling the middleware function `name` in `cfg.use`.
 
-    serialize = (cfg,name) ->
+    seem = require 'seem'
+
+    serialize = seem (cfg,name) ->
 
       ctx = {cfg}
-      it = Promise.resolve()
       if cfg.use?
 
         for m in cfg.use when m[name]?
-          do (m) ->
-            it = it.then ->
-              debug "Calling middleware #{m.name}.#{name}()"
-              m[name].call ctx, ctx
+          debug "Calling middleware #{m.name}.#{name}()"
+          ctx.__middleware_name = m.name ? '(unnamed middleware)'
+          yield m[name].call ctx, ctx
 
-      it
-
-    Promise = require 'bluebird'
     pkg = require './package.json'
-    debug = (require 'debug') "#{pkg.name}:serialize"
+    debug = (require 'tangible') "#{pkg.name}:serialize"
     module.exports = serialize
