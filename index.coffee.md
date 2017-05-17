@@ -15,5 +15,5 @@ Serialize calling the middleware function `name` in `cfg.use`.
       it
 
     pkg = require './package.json'
-    debug = (require 'tangible') "#{pkg.name}:serialize"
+    debug = (require 'tangible') pkg.name
     module.exports = serialize
