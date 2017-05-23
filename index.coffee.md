@@ -12,7 +12,12 @@ Serialize calling the middleware function `name` in `cfg.use`.
         for m in modules when m[name]?
           debug "Calling middleware #{m.name}.#{name}()"
           ctx.__middleware_name = m.name ? '(unnamed middleware)'
-          it = yield m[name].call ctx, ctx
+          try
+            it = yield m[name].call ctx, ctx
+          catch error
+            value = error.stack ? error.toString()
+            debug.dev "Middleware `#{middleware.name}.#{name}` failed", value
+            it = null
 
       it
 
