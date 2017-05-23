@@ -4,9 +4,9 @@ Serialize calling the middleware function `name` in `cfg.use`.
 
     serialize = seem (cfg,name) ->
       ctx = {cfg}
-      serialize_modules cfg.use, ctx, name
+      yield serialize_modules cfg.use, ctx, name
 
-    serialize_modules = (modules,ctx,name) ->
+    serialize_modules = seem (modules,ctx,name) ->
       if modules?
 
         for m in modules when m[name]?
