@@ -4,7 +4,7 @@
   "description": "serialize function that was previously available as `useful-wind/serialize`",
   "main": "index.js",
   "scripts": {
-    "prepublish": "coffee -c -m index.coffee.md",
+    "prepublishOnly": "npm install --only=dev && rm package-lock.json && coffee -c -m *.coffee.md",
     "pretest": "npm install",
     "test": "mocha"
   },
