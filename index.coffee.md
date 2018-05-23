@@ -7,6 +7,7 @@ Serialize calling the middleware function `name` in `cfg.use`.
       yield serialize_modules cfg.use, ctx, name
 
     serialize_modules = seem (modules,ctx,name) ->
+      errors = 0
       if modules?
 
         for m in modules when m[name]?
@@ -17,8 +18,9 @@ Serialize calling the middleware function `name` in `cfg.use`.
           catch error
             value = error.stack ? error.toString()
             debug.dev "Middleware `#{m.name}.#{name}` failed", value
+            errors++
 
-      return
+      return errors
 
     serialize.modules = serialize_modules
 
