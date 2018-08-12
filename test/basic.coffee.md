@@ -10,4 +10,7 @@
         mw2 =
           include: ->
             @a.should.equal 3
-        serialize use: [mw1, mw2], 'include'
+        mw3 =
+          include: ->
+            throw ["hello"]
+        serialize use: [mw1, mw2, mw3], 'include'

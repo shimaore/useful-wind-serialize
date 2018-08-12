@@ -4,19 +4,19 @@
   "description": "serialize function that was previously available as `useful-wind/serialize`",
   "main": "index.js",
   "scripts": {
-    "prepublishOnly": "npm install --only=dev && rm package-lock.json && coffee -c -m *.coffee.md",
-    "pretest": "npm install",
+    "prepublishOnly": "npm run build",
+    "build": "npm install --only=dev && rm package-lock.json && coffee -c -m *.coffee.md",
+    "pretest": "npm run build && coffee -c test/*.coffee.md",
     "test": "mocha"
   },
   "author": "Stéphane Alnet <stephane@shimaore.net> (http://stephane.shimaore.net/)",
   "license": "Unlicense",
   "dependencies": {
-    "seem": "^2.0.0",
-    "tangible": "^1.9.0"
+    "tangible": "^2.0.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "coffee-script": "^1.12.7",
-    "mocha": "^4.1.0"
+    "coffeescript": "^2.3.1",
+    "mocha": "^5.2.0"
   }
 }
