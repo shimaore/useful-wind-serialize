@@ -16,7 +16,7 @@ Serialize calling the middleware function `name` in `cfg.use`.
           try
             yield m[name].call ctx, ctx
           catch error
-            value = error.stack ? error.toString()
+            value = error.stack ? (try JSON.stringify error) ? error.toString()
             debug.dev "Middleware `#{m.name}.#{name}` failed", value
             errors++
 
