@@ -1,12 +1,10 @@
 Serialize calling the middleware function `name` in `cfg.use`.
 
-    seem = require 'seem'
-
-    serialize = seem (cfg,name) ->
+    serialize = (cfg,name) ->
       ctx = {cfg}
-      yield serialize_modules cfg.use, ctx, name
+      await serialize_modules cfg.use, ctx, name
 
-    serialize_modules = seem (modules,ctx,name) ->
+    serialize_modules = (modules,ctx,name) ->
       errors = 0
       if modules?
 
@@ -14,7 +12,7 @@ Serialize calling the middleware function `name` in `cfg.use`.
           debug "Calling middleware #{m.name}.#{name}()"
           ctx.__middleware_name = m.name ? '(unnamed middleware)'
           try
-            yield m[name].call ctx, ctx
+            await m[name].call ctx, ctx
           catch error
             value = error.stack ? (try JSON.stringify error) ? error.toString()
             debug.dev "Middleware `#{m.name}.#{name}` failed", value
